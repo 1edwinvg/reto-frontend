@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RepositoryService } from '../../shared/repository.service';
+
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from '../../shared/dialog/success-dialog/success-dialog.component';
 import { ErrorHandlerService } from '../../shared/ErrorHandlerService';
 import { AddCurso } from '../../interface/AddCurso.model'
+import { RepositoryService } from 'src/app/shared/Repository.Service';
 
 @Component({
   selector: 'app-curso-create',
@@ -97,7 +98,7 @@ export class CursoCreateComponent implements OnInit {
     };
 
     // DEFINE URL PARA LA PETICION AL BACKEND
-   let apiUrl = " "; // por definir
+   let apiUrl = 'courses'; // por definir
    this.repository.create(apiUrl, curso).subscribe(
       res => {
         let dialogRef = this.dialog.open(

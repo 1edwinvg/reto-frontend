@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Catalogo } from '../interface/catalago.model';
 import { Router } from '@angular/router';
-import { RepositoryService } from '../shared/Repository.Service';
+
 import { ErrorHandlerService } from '../shared/ErrorHandlerService';
+import { RepositoryService } from '../shared/Repository.Service';
 
 
 @Component({
