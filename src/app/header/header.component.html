@@ -1,0 +1,17 @@
+<mat-toolbar class= "cabecera">
+  <!-- <img class="imagen" src="../../assets/img/everis.svg" alt=""> -->
+  <img class="imagen" src="../../assets/img/logo-iberia.svg" alt="">
+</mat-toolbar>
+<div class="header">
+  <button mat-button [matMenuTriggerFor]="aboveMenu">Catalogo</button>
+  <mat-menu #aboveMenu="matMenu" yPosition="above">
+    <button mat-menu-item  routerLink="/catalogo">Catalogos de cursos</button>
+    <button mat-menu-item></button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowMenu">Curso</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item [routerLink]="['/curso/create']">Crear un Curso</button>
+    <button mat-menu-item>Cursos Existentes</button>
+  </mat-menu>
+</div>
