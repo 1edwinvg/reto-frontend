@@ -1,0 +1,21 @@
+mat-card-content, mat-card-title, mat-card-actions {
+  text-align: center;
+}
+
+mat-card-content{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+mat-form-field{
+  width: 100%;
+}
+.error-constraint{
+color:red;
+font-size: 0.7em;
+margin: 3% 1%;
+}
+.letra-aclaracion{
+  color: rgb(0, 42, 121);
+
+}

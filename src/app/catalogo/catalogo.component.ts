@@ -12,7 +12,7 @@ import { RepositoryService } from '../shared/Repository.Service';
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.scss']
 })
-export class CatalogoComponent implements OnInit {
+export class CatalogoComponent<T> implements OnInit {
   public displayedColumns = [
     'Profesor',
     'Titulo',
@@ -26,14 +26,14 @@ export class CatalogoComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
-    private repoService: RepositoryService,
+    private repoService: RepositoryService<T>,
     private errorService: ErrorHandlerService,
     private router: Router
   ) {}
 
   ngOnInit() {
     // this.operators.sort = this.sort;
-    this.getAllOwners();
+    this.getAllCurso();
   }
 
   ngAfterViewInit(): void {
@@ -42,12 +42,11 @@ export class CatalogoComponent implements OnInit {
     this.operators.paginator = this.paginator;
   }
 
-  public getAllOwners = () => {
+  public getAllCurso = () => {
     this.repoService.getData('courses/all').subscribe(
       res => {
         this.operators.data = res as Catalogo[];
         console.log( this.operators.data);
-
       },
       error => {
         this.errorService.handleError(error);
