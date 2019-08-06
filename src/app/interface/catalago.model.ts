@@ -1,4 +1,4 @@
-export interface Catalogo {
+export class Catalogo {
 
   id: number;
   activo: boolean;

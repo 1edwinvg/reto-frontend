@@ -13,31 +13,38 @@ import { ErrorHandlerService } from '../../shared/ErrorHandlerService';
 import { AddCurso } from '../../interface/AddCurso.model';
 import { RepositoryService } from 'src/app/shared/Repository.Service';
 import { Catalogo } from 'src/app/interface/catalago.model';
+import { Observable } from 'rxjs';
+import { MessageService } from 'src/app/shared/MessageService';
 
 @Component({
   selector: 'app-curso-create',
   templateUrl: './curso-create.component.html',
   styleUrls: ['./curso-create.component.scss']
 })
-export class CursoCreateComponent<T> implements OnInit {
+export class CursoCreateComponent implements OnInit {
   public checked: boolean;
   public aviso: string = ' Inactivo';
   public cursoForm: FormGroup;
   private dialogConfig;
   private mensajeError: string;
-  public cursos: any = [];
-  public losCursos: Catalogo[];
+  private curso: any = [];
+  private losCursos: Catalogo[];
   private activarAviso: boolean = false;
 
 
   constructor(
     private location: Location,
-    private repository: RepositoryService<T>,
+    private repository: RepositoryService,
     private dialog: MatDialog,
-    private errorService: ErrorHandlerService
+    private errorService: ErrorHandlerService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
+
+    this.getAllCurso();
+
+
     this.cursoForm = new FormGroup({
       profesor: new FormControl('', [Validators.required]),
       titulo: new FormControl('', [
@@ -59,8 +66,6 @@ export class CursoCreateComponent<T> implements OnInit {
       disableClose: true,
       data: {}
     };
-    // this.getAllCurso();
-    // console.log(this.getAllCurso);
 
   }
   onChange(event) {
@@ -124,24 +129,22 @@ export class CursoCreateComponent<T> implements OnInit {
     );
   }
 
-  public getCurso = ()=>{
-    this.repository.getDato('courses/all').subscribe(
-      curso => this.cursos = curso
+
+    // this.curso.array.forEach(element => {
+    //   element.push(this.losCursos);
+    // });
+
+
+  public  getAllCurso = () => {
+    this.repository.getData('courses/all').subscribe(
+      res => {
+        this.losCursos = res as Catalogo[] ;
+        console.log(this.losCursos);
+      },
+      error => {
+        this.errorService.handleError(error);
+      }
     );
+
   }
-
-  // public getAllCurso = () => {
-
-  //   this.repository.getData('courses/all').subscribe(
-  //     res => {
-  //      this.cursos = res as Catalogo[];
-  //       console.log( this.cursos);
-  //     },
-  //     error => {
-  //       this.errorService.handleError(error);
-  //     }
-  //   );
-  //   return this.cursos;
-  // }
-
 }

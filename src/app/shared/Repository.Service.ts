@@ -4,11 +4,12 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './MessageService';
 import { Hero } from '../interface/prueba';
+import { Catalogo } from '../interface/catalago.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RepositoryService<T> {
+export class RepositoryService {
 
 
   private urlAddress = '/reto-autentia-backend/rest';
@@ -24,14 +25,13 @@ export class RepositoryService<T> {
     );
   }
 
-  public getDato(route: string): Observable<T> {
-
-    return this.http.get<T>(route)
-      .pipe(
-        tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError<T>('getdato'))
-      );
-  }
+  // public getDato(route: string): Observable<Catalogo[]> {
+  //   return this.http.get<Catalogo[]>(this.urlAddress + route)
+  //   .pipe(
+  //     tap(_ => this.log('cursos')),
+  //     catchError(this.handleError<Catalogo[]>('getDato', []))
+  //   );
+  // }
 
   public create(route: string, body) {
     return this.http.post(
@@ -64,15 +64,7 @@ export class RepositoryService<T> {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
   }
-  private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
-  }
-   /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -85,5 +77,10 @@ export class RepositoryService<T> {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
   }
 }

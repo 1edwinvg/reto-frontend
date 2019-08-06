@@ -26,7 +26,7 @@ export class CatalogoComponent<T> implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
-    private repoService: RepositoryService<T>,
+    private repoService: RepositoryService,
     private errorService: ErrorHandlerService,
     private router: Router
   ) {}

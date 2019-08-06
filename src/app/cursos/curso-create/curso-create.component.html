@@ -11,115 +11,26 @@
       fxLayoutGap="20px"
       method="POST"
     >
-      <mat-card-content>
-        <mat-checkbox [checked]="checked" (change)="onChange($event)"
-          >Activo</mat-checkbox
-        >
-        <br />
-        <mat-hint align="end" class="letra-aclaracion">{{ aviso }}</mat-hint>
+    <mat-card-content>
+      <mat-checkbox [checked]="checked" (change)="onChange($event)"
+        >Activo</mat-checkbox
+      >
+      <br />
+      <mat-hint align="end" class="letra-aclaracion">{{ aviso }}</mat-hint>
 
-        <mat-form-field>
-          <mat-label>Profesor</mat-label>
-          <mat-select formControlName="profesor" required>
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let curso of losCursos" [value]="curso.profesor">
-              {{ curso.profesor }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="hasError('apellido','required')"
-            >Elegir un profesor</mat-error
-          >
-          <!-- <mat-hint>{{ cursos.profesor.value?.sound }}</mat-hint> -->
-        </mat-form-field>
-        <!-- <mat-form-field>
-          <input
-            matInput
-            type="text"
-            placeholder="apellido"
-            formControlName="apellido"
-            id="apellido"
-          />
-          <mat-hint align="end">no mas de 60 caracteres.</mat-hint>
-          <mat-error *ngIf="hasError('apellido', 'required')"
-            >se necesita el nombre</mat-error
-          >
-          <mat-error *ngIf="hasError('apellido', 'maxlength')"
-            >Tienes más de 60 caracteres.</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            type="text"
-            placeholder="email"
-            formControlName="email"
-            id="email"
-          />
-          <mat-hint align="end">un email valido</mat-hint>
-          <mat-error *ngIf="hasError('email', 'required')"
-            >se necesita el email</mat-error
-          >
-          <mat-error *ngIf="hasError('email', 'email')"
-            >el email no valido</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field>
-          <input
-            matInput
-            type="text"
-            placeholder="telefono"
-            formControlName="movil"
-          />
-          <mat-hint align="end">telefono o movil</mat-hint>
-          <mat-error
-            align="end"
-            *ngIf="cursoForm.get('movil').hasError('minlength')"
-            >al menos 9 digitos</mat-error
-          >
-          <mat-error align="end" *ngIf="hasError('movil', 'pattern')"
-            >introduzca un numero de telefono real</mat-error
-          >
-          <mat-error align="end" *ngIf="hasError('movil', 'required')"
-            >numero de telefono o movil requerido
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input
-            matInput
-            type="text"
-            placeholder="dolencia"
-            formControlName="dolencia"
-          />
-          <mat-hint align="end">no se admiten mas 60 caracteres</mat-hint>
-          <mat-error *ngIf="hasError('dolencia', 'required')"
-            >dolencia requerida</mat-error
-          >
-          <mat-error *ngIf="hasError('dolencia', 'maxlength')"
-            >has introducido mas de 60 caracteres</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            color="primary"
-            matInput
-            [matDatepicker]="picker"
-            formControlName="edad"
-            placeholder="Fecha de nacimiento - MM/DD/YYYY"
-            [ngModel]="edad | date: 'yyyy-MM-dd'"
-            readonly
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="hasError('edad', 'required')"
-            >fecha de nacimiento requerida</mat-error
-          >
-        </mat-form-field>-->
       </mat-card-content>
+
+      <mat-form-field class="selector">
+        <mat-label>Profesor</mat-label>
+        <mat-select >
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let curso of losCursos" [value]="curso.profesor">
+            {{curso.profesor}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="cursoForm.hasError('required')">Escoja un profesor</mat-error>
+        <mat-hint>{{cursoForm.value?.sound}}</mat-hint>
+      </mat-form-field>
 
       <mat-card-actions align="center">
         <button mat-raised-button color="primary" [disabled]="!cursoForm.valid">
