@@ -1,3 +1,4 @@
+/* Está como clase para testeo de conceptos */
 export class Catalogo {
 
   id: number;
